@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="НИИ «Сфера»">
+<title>НИИ «Сфера» · Досье</title>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=1">
+<link rel="shortcut icon" href="favicon.ico?v=1">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon.png?v=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;600;800&family=VT323&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ BOOT ============ -->
+<div id="boot" class="boot">
+    <div class="boot__scan"></div>
+    <div class="boot__inner">
+        <pre class="boot__log" id="bootLog"></pre>
+    </div>
+</div>
+
+<!-- ============ ЭФФЕКТЫ ============ -->
+<div class="fx fx--scanlines"></div>
+<div class="fx fx--noise"></div>
+<div class="fx fx--vignette"></div>
+<div class="fx fx--grain"></div>
+<div class="fx fx--edge"></div>
+<div class="fx fx--glitch" id="fxGlitch"></div>
+
+<!-- ============ ОСНОВНОЙ ИНТЕРФЕЙС ============ -->
+<div class="shell" id="shell" hidden>
+
+    <header class="head">
+        <div class="head__left">
+            <a class="head__mark" href="#dossier" data-nav data-page="dossier">НИИ «СФЕРА»</a>
+            <span class="head__sub">Научно-исследовательский институт «Сфера»</span>
+        </div>
+        <div class="head__right">
+            <div class="vol">
+                <span class="vol__label">ЗВУК</span>
+                <input type="range" id="vol" min="0" max="100" value="50" class="vol__slider">
+                <button class="vol__mute" id="muteBtn">mute</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <a class="tab" data-nav data-page="dossier"       href="#dossier">Личное дело</a>
+        <a class="tab" data-nav data-page="dialog"        href="#dialog">Переписка</a>
+        <a class="tab" data-nav data-page="motivation"    href="#motivation">Мотивация</a>
+        <a class="tab" data-nav data-page="goals"         href="#goals">Личные подцели</a>
+        <a class="tab" data-nav data-page="goals-shared"  href="#goals-shared">Общие цели</a>
+    </nav>
+
+    <main class="content" id="content"></main>
+
+    <div class="hint-bar" id="hintBar">
+        <span class="hint-bar__dot"></span>
+        <span>клик по странице — открыть следующую реплику</span>
+    </div>
+
+    <footer class="foot">
+        <span>НИИ «СФЕРА» · 1974—1991</span>
+    </footer>
+</div>
+
+<!-- ============================================================
+     ШАБЛОНЫ СТРАНИЦ
+     ============================================================ -->
+
+<!-- ==================================================
+     1. ЛИЧНОЕ ДЕЛО
+     ================================================== -->
+<script type="text/template" id="tpl-dossier">
+<section class="doc doc--dossier">
+
+    <h2 class="doc__title">ЛИЧНОЕ ДЕЛО</h2>
+
+    <div class="dossier__name">Волков Максим Андреевич.</div>
+
+    <dl class="dossier__meta">
+        <div class="field">
+            <dt class="field__label">Возраст</dt>
+            <dd class="field__value">29 лет.</dd>
+        </div>
+        <div class="field">
+            <dt class="field__label">Пол</dt>
+            <dd class="field__value">мужской.</dd>
+        </div>
+        <div class="field field--wide">
+            <dt class="field__label">Образование</dt>
+            <dd class="field__value">среднее специальное. Рязанское высшее воздушно-десантное командное училище (не окончил). Курсы спецподготовки.</dd>
+        </div>
+        <div class="field field--wide">
+            <dt class="field__label">Место работы</dt>
+            <dd class="field__value">частный подрядчик. Наёмник. Официально — охранник в ЧОП.</dd>
+        </div>
+    </dl>
+
+    <div class="dossier__section">Биография</div>
+
+    <div class="dossier__body">
+        <p>Родился в Рязани. Отец — военный, мать — учительница. Воспитывался в строгости. С детства — спорт, дисциплина, «ты должен быть сильным».</p>
+
+        <p>В 18 поступил в десантное училище. Учился хорошо, но не блестяще. На третьем курсе — конфликт с командиром, драка, отчисление. Вернулся в Рязань. Пошёл в армию срочником. Отслужил. Вернулся.</p>
+
+        <p>В 2016 уехал в Москву. Работал охранником, потом — в ЧОП. Познакомился с людьми, которые предложили «работу по контракту». Согласился. Первый контракт — Сирия. Второй — Африка. Третий — нелегальный, на Кавказе.</p>
+
+        <p>Деньги хорошие. Работа грязная. Не задавал вопросов. Убивал. Возвращался. Молчал.</p>
+
+        <p>В 2019 женился. Жена — медсестра, познакомились в больнице, куда он попал с ранением. В 2021 родился сын. Пытался уйти из профессии. Открыл автосервис. Не пошло. Вернулся к контрактам.</p>
+
+        <p>В 2024 случилось то, что сломало его. Жена и сын заснули и не проснулись. «Сонная болезнь». Врачи бессильны. Они в коме восемь месяцев. Он платит за их содержание в клинике, тратит всё, что заработал. Продал квартиру. Продал машину. Живёт в съёмной комнате.</p>
+
+        <p>Спит по три часа. Не пьёт. Не курит. Не разговаривает. Только работает — и приходит в клинику. Сидит у койки. Держит жену за руку. Говорит с ней. Она не отвечает.</p>
+
+        <p class="dossier__final">Когда позвонили и предложили контракт на НИИ «Сфера» — согласился, не дослушав.</p>
+    </div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     2. ПЕРЕПИСКА
+     ================================================== -->
+<script type="text/template" id="tpl-dialog">
+<section class="doc doc--dialog">
+
+    <h2 class="doc__title">РАЗГОВОР</h2>
+
+    <div class="scene print" data-lines='["Максим стоит у палаты. За стеклом — жена. Рядом — сын. Аппараты пищат ровно, монотонно. Он держит телефон. Смотрит на них через стекло. Звонок. Он не сразу отвечает — секунд десять держит телефон в руке."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Волков?"]'></div>
+        <div class="chat__line print" data-lines='["— Волков."]'></div>
+        <div class="chat__line print" data-lines='["— Есть работа. Объект на северо-востоке. Сопровождение группы."]'></div>
+        <div class="chat__line print" data-lines='["— Какая группа?"]'></div>
+        <div class="chat__line print" data-lines='["— Не ваше дело. Ваше дело — зачистка. На территории есть люди. Не местные. Под влиянием чего-то. Обезвредить. Группу довести. Обратно вывести."]'></div>
+        <div class="chat__line print" data-lines='["— Сколько платят?"]'></div>
+        <div class="chat__line print" data-lines='["— Не деньгами. Покрытие содержания вашей семьи в клинике. Год вперёд. Плюс доступ к архивам объекта."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Максим молчит. Смотрит на жену. Она не двигается. Смотрит на сына. Он тоже. Аппараты пищат."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Что за объект?"]'></div>
+        <div class="chat__line print" data-lines='["— НИИ. Закрытый. Сфера."]'></div>
+        <div class="chat__line print" data-lines='["— Я не слышал о таком."]'></div>
+        <div class="chat__line print" data-lines='["— И не должны были. До сегодняшнего дня."]'></div>
+        <div class="chat__line print" data-lines='["— Почему я?"]'></div>
+        <div class="chat__line print" data-lines='["— Потому что у вас там личный интерес. Не спрашивайте, откуда знаю. Просто знаю."]'></div>
+        <div class="chat__line print" data-lines='["— Это шантаж?"]'></div>
+        <div class="chat__line print" data-lines='["— Это предложение. Хотите — соглашайтесь. Не хотите — найду другого. Но другого с такой мотивацией — не найду."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Максим снова смотрит на жену. На сына. На аппараты. Вздыхает. Прижимает ладонь к стеклу."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Я в деле."]'></div>
+        <div class="chat__line print" data-lines='["— Хорошо. Пришлём координаты."]'></div>
+        <div class="chat__line print" data-lines='["— И ещё. Что там внутри? Что за «Сфера»?"]'></div>
+        <div class="chat__line print" data-lines='["— Узнаете на месте. Или не узнаете вообще."]'></div>
+        <div class="chat__line print" data-lines='["— Это не ответ."]'></div>
+        <div class="chat__line print" data-lines='["— Это лучший ответ, который вы получите."]'></div>
+        <div class="chat__line print" data-lines='["— Я хочу знать, за что рискую. Не для себя. Для них."]'></div>
+    </div>
+
+    <div class="scene print" data-lines='["Пауза. Голос тише."]'></div>
+
+    <div class="chat">
+        <div class="chat__line print" data-lines='["— Там был проект. «Морфей». Изучали сны. Управляли снами. Что-то пошло не так. Люди начали засыпать. И не просыпаться. Ваша семья — не первая. И не последняя."]'></div>
+        <div class="chat__line print" data-lines='["— И что? Я могу их разбудить?"]'></div>
+        <div class="chat__line print" data-lines='["— Не знаю. Но если есть шанс — он там. Внутри. Это всё, что могу сказать."]'></div>
+        <div class="chat__line print" data-lines='["— Этого мало."]'></div>
+        <div class="chat__line print" data-lines='["— Это больше, чем у вас есть сейчас."]'></div>
+        <div class="chat__line print" data-lines='["— Хорошо. Когда?"]'></div>
+        <div class="chat__line print" data-lines='["— Двадцать второе марта. Детали по прибытии."]'></div>
+    </div>
+
+    <div class="scene scene--final print" data-lines='["Максим кладёт трубку. Смотрит на жену. На сына. Долго. Потом медленно убирает телефон в карман и идет к выходу из клиники. Уже зная, что вернется не скоро."]'></div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     3. МОТИВАЦИЯ
+     ================================================== -->
+<script type="text/template" id="tpl-motivation">
+<section class="doc doc--motivation">
+
+    <h2 class="doc__title">МОТИВАЦИЯ</h2>
+
+    <div class="motivation">
+        <p class="motivation__lead">Жена и сын в коме 8 месяцев. Клиника. Аппараты. Тишина. Он продал всё, что можно было продать. Осталось только тело — и он сдаёт его в аренду.</p>
+
+        <p>Комиссия 19 предложила контракт: сопровождение группы, оплата содержания семьи в клинике на год. Он не дослушал.</p>
+
+        <p class="motivation__final">Он не верит в чудеса. Он верит в результат.</p>
+    </div>
+
+</section>
+</script>
+
+<!-- ==================================================
+     4. ЛИЧНЫЕ ПОДЦЕЛИ
+     ================================================== -->
+<script type="text/template" id="tpl-goals">
+<section class="doc doc--goals">
+
+    <h2 class="doc__title">ЛИЧНЫЕ ПОДЦЕЛИ</h2>
+
+    <ol class="goals">
+        <li class="goal">
+            <div class="goal__num">01</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти историю болезни человека, находившегося в коме с 1987 года. Сопоставить с состоянием жены и сына.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">02</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти записи дежурных о состоянии пациента. Понять, как система реагирует на попытки отключения.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">03</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти документ о закрытии комплекса. Понять, что стало с остальными пациентами.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">04</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти любые сведения о людях, вышедших из комы. Понять, есть ли вообще способ.</p>
+            </div>
+        </li>
+    </ol>
+
+</section>
+</script>
+
+<!-- ==================================================
+     5. ОБЩИЕ ЦЕЛИ — НЕ ТРОГАЕМ
+     ================================================== -->
+<script type="text/template" id="tpl-goals-shared">
+<section class="doc doc--goals">
+
+    <h2 class="doc__title">ОБЩИЕ ЦЕЛИ</h2>
+
+    <ol class="goals">
+        <li class="goal">
+            <div class="goal__num">01</div>
+            <div class="goal__body">
+                <p class="goal__main">Проникнуть на территорию НИИ «Сфера».</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">02</div>
+            <div class="goal__body">
+                <p class="goal__main">Найти вход в подземный бункер.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">03</div>
+            <div class="goal__body">
+                <p class="goal__main">Добраться до ЭВМ «Морфей» — ядро системы.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">04</div>
+            <div class="goal__body">
+                <p class="goal__main">Запустить систему. Вывести из консервации.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">05</div>
+            <div class="goal__body">
+                <p class="goal__main">Погрузиться в коллективный сон. Все восемь — одновременно.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">06</div>
+            <div class="goal__body">
+                <p class="goal__main">Внутри сна — найти источник «сонной болезни».</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">07</div>
+            <div class="goal__body">
+                <p class="goal__main">Остановить распространение. Любым способом.</p>
+            </div>
+        </li>
+
+        <li class="goal">
+            <div class="goal__num">08</div>
+            <div class="goal__body">
+                <p class="goal__main">Вернуться с данными. Если получится — все. Если нет — хотя бы один.</p>
+            </div>
+        </li>
+    </ol>
+
+</section>
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
